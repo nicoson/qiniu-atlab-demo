@@ -1,5 +1,5 @@
-// let APIHOST = 'http://0.0.0.0:3000';
-let APIHOST = '';
+let APIHOST = 'http://0.0.0.0:3000';
+// let APIHOST = '';
 
 // let isEditor = sessionStorage.isEditor == undefined ? false : (sessionStorage.isEditor == 'true' ? true : false);
 

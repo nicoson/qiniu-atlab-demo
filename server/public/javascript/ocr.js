@@ -138,7 +138,7 @@ function drawbox(ctx,bbox) {
 
 function drawtext(ctx,fontsize,word,position) {
     ctx.fillStyle = "red";
-    ctx.font=`${fontsize}px Georgia`;
+    ctx.font=`${fontsize}px Arial`;
     ctx.fillText(word,position[0],position[1]);
     ctx.closePath();
 }
