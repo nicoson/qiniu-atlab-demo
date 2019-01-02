@@ -1,0 +1,76 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: system-ui;
+}
+
+// header, section, footer, div {
+//     border: 1px solid #bbb;
+// }
+
+body {
+    min-width: 800px;
+}
+
+p {
+    word-wrap: break-word;
+}
+
+.wa-btn {
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: .7rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    width: 5rem;
+}
+
+.wa-btn-success {
+    .wa-btn;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.wa-btn-default {
+    .wa-btn;
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.wa-btn-success:hover, .wa-btn-default:hover {
+    cursor: pointer;
+}
+
+.wa-component-hidden {
+    display: none !important;
+}
+
+#wa_loading_modal {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    background: rgba(0,0,0,.5);
+    color: white;
+    font-size: 1rem;
+    align-items: center;
+    justify-content: center;
+
+    // p {
+    //     line-height: 2rem;
+    //     height: 2rem;
+    // }
+}

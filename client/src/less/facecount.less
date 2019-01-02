@@ -1,0 +1,134 @@
+header {
+    height: 15vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    div {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        
+        &:first-child {
+            height: 60%;
+            img {
+                height: 80%;
+                margin-left: 5vw;
+            }
+            p {
+                margin-left: 5vw;
+                font-size: 1.5rem;
+            }
+        }
+
+        &#wa_home_navbar {
+            justify-content: space-around;
+            padding: .3rem;
+            background: url('/imgs/navbg.jpg');
+
+            a {
+                color: #777;
+                text-decoration: none;
+
+                &.wa-home-nav-selected {
+                    color: #DAA520;
+                }
+            }
+        }
+    }
+}
+
+section {
+    height: 78vh;
+    padding: 20px;
+    overflow: auto;
+    display: flex;
+    border: 1px solid #aaa;
+
+    #wa_home_left_panel {
+        width: 70%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        overflow: auto;
+        border: 1px solid #aaa;
+        
+        #wa_home_imgcontainer {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        #wa_home_canvas {
+            // width: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            min-height: 50%;
+        }
+    }
+
+    #wa_home_right_panel {
+        width: 30%;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid #aaa;
+        overflow: auto;
+
+        h2,h3 {
+            text-align: center;
+        }
+
+        h3 {
+            margin: 2rem 0 1rem 0;
+        }
+
+        #wa_home_resultshow {
+            font-size: 1rem;
+            width: 100%;
+
+            table {
+                // width: 100%;
+                margin: 0 auto;
+                td {
+                    padding: .5rem;
+                }
+            }
+        }
+    }
+}
+
+footer {
+    height: 7vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p {
+        text-align: center;
+        font-size: .7rem;
+    }
+}
+
+
+.wa-facecount-left-img-card {
+    width: 250px;
+    padding: 1rem;
+
+    &:hover {
+        cursor: pointer;
+        border: 2px solid rgba(0,0,0,.3);
+        border-radius: 5px;
+    }
+
+    img {
+        width: 100%;
+    }
+    p {
+        text-align: center;
+    }
+}

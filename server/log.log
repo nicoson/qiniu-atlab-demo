@@ -1,0 +1,59 @@
+[2018-04-27T11:02:47.916] [INFO] wa - { Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+    at Query.Sequence._packetToError (/Users/xiaohuini/Projects/Qiniu/wangan/server/node_modules/mysql/lib/protocol/sequences/Sequence.js:52:14)
+    at Query.ErrorPacket (/Users/xiaohuini/Projects/Qiniu/wangan/server/node_modules/mysql/lib/protocol/sequences/Query.js:77:18)
+    at Protocol._parsePacket (/Users/xiaohuini/Projects/Qiniu/wangan/server/node_modules/mysql/lib/protocol/Protocol.js:279:23)
+    at Parser.write (/Users/xiaohuini/Projects/Qiniu/wangan/server/node_modules/mysql/lib/protocol/Parser.js:76:12)
+    at Protocol.write (/Users/xiaohuini/Projects/Qiniu/wangan/server/node_modules/mysql/lib/protocol/Protocol.js:39:16)
+    at Socket.<anonymous> (/Users/xiaohuini/Projects/Qiniu/wangan/server/node_modules/mysql/lib/Connection.js:103:28)
+    at emitOne (events.js:116:13)
+    at Socket.emit (events.js:211:7)
+    at addChunk (_stream_readable.js:263:12)
+    at readableAddChunk (_stream_readable.js:250:11)
+    --------------------
+    at Protocol._enqueue (/Users/xiaohuini/Projects/Qiniu/wangan/server/node_modules/mysql/lib/protocol/Protocol.js:145:48)
+    at Connection.query (/Users/xiaohuini/Projects/Qiniu/wangan/server/node_modules/mysql/lib/Connection.js:208:25)
+    at /Users/xiaohuini/Projects/Qiniu/wangan/server/model/DBConnection.js:232:20
+    at new Promise (<anonymous>)
+    at Function.DBConn.insertData (/Users/xiaohuini/Projects/Qiniu/wangan/server/model/DBConnection.js:227:13)
+    at data.then.data (/Users/xiaohuini/Projects/Qiniu/wangan/server/routes/index.js:135:26)
+    at <anonymous>
+    at process._tickCallback (internal/process/next_tick.js:188:7)
+  code: 'ER_PARSE_ERROR',
+  errno: 1064,
+  sqlMessage: 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'\' at line 1',
+  sqlState: '42000',
+  index: 0,
+  sql: 'INSERT INTO terror(url,cate,precise,source,created_date) VALUES ' }
+[2018-04-27T11:09:47.559] [INFO] wa - ReferenceError: temp is not defined
+    at /Users/xiaohuini/Projects/Qiniu/wangan/server/model/DBConnection.js:228:9
+    at new Promise (<anonymous>)
+    at Function.DBConn.insertData (/Users/xiaohuini/Projects/Qiniu/wangan/server/model/DBConnection.js:227:13)
+    at data.then.data (/Users/xiaohuini/Projects/Qiniu/wangan/server/routes/index.js:135:26)
+    at <anonymous>
+    at process._tickCallback (internal/process/next_tick.js:188:7)
+[2018-04-27T11:10:04.761] [INFO] wa - ReferenceError: temp is not defined
+    at /Users/xiaohuini/Projects/Qiniu/wangan/server/model/DBConnection.js:228:9
+    at new Promise (<anonymous>)
+    at Function.DBConn.insertData (/Users/xiaohuini/Projects/Qiniu/wangan/server/model/DBConnection.js:227:13)
+    at data.then.data (/Users/xiaohuini/Projects/Qiniu/wangan/server/routes/index.js:135:26)
+    at <anonymous>
+    at process._tickCallback (internal/process/next_tick.js:188:7)
+[2018-04-27T12:12:47.958] [INFO] wa - ReferenceError: temp is not defined
+    at /Users/xiaohuini/Projects/Qiniu/wangan/server/model/DBConnection.js:228:9
+    at new Promise (<anonymous>)
+    at Function.DBConn.insertData (/Users/xiaohuini/Projects/Qiniu/wangan/server/model/DBConnection.js:227:13)
+    at data.then.data (/Users/xiaohuini/Projects/Qiniu/wangan/server/routes/index.js:135:26)
+    at <anonymous>
+    at process._tickCallback (internal/process/next_tick.js:188:7)
+[2018-04-27T12:13:00.762] [INFO] wa - ReferenceError: temp is not defined
+    at /Users/xiaohuini/Projects/Qiniu/wangan/server/model/DBConnection.js:228:9
+    at new Promise (<anonymous>)
+    at Function.DBConn.insertData (/Users/xiaohuini/Projects/Qiniu/wangan/server/model/DBConnection.js:227:13)
+    at data.then.data (/Users/xiaohuini/Projects/Qiniu/wangan/server/routes/index.js:135:26)
+    at <anonymous>
+    at process._tickCallback (internal/process/next_tick.js:188:7)
+[2018-04-27T19:11:02.287] [INFO] wa - no data
+[2018-04-27T19:11:06.893] [INFO] wa - no data
+[2018-04-27T20:04:30.820] [INFO] wa - no data
+[2018-04-27T20:14:35.767] [INFO] wa - no data
+[2018-04-30T10:46:42.886] [INFO] wa - no data

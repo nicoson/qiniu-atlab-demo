@@ -1,0 +1,8 @@
+#wa_home_resultshow table {
+  font-size: .8rem;
+}
+#wa_home_resultshow table th,
+#wa_home_resultshow table td {
+  word-break: break-all;
+  border-bottom: 1px dashed #ccc;
+}

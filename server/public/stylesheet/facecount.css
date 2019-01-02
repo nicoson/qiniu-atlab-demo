@@ -1,0 +1,113 @@
+header {
+  height: 15vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+header div {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+header div:first-child {
+  height: 60%;
+}
+header div:first-child img {
+  height: 80%;
+  margin-left: 5vw;
+}
+header div:first-child p {
+  margin-left: 5vw;
+  font-size: 1.5rem;
+}
+header div#wa_home_navbar {
+  justify-content: space-around;
+  padding: .3rem;
+  background: url('/imgs/navbg.jpg');
+}
+header div#wa_home_navbar a {
+  color: #777;
+  text-decoration: none;
+}
+header div#wa_home_navbar a.wa-home-nav-selected {
+  color: #DAA520;
+}
+section {
+  height: 78vh;
+  padding: 20px;
+  overflow: auto;
+  display: flex;
+  border: 1px solid #aaa;
+}
+section #wa_home_left_panel {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  overflow: auto;
+  border: 1px solid #aaa;
+}
+section #wa_home_left_panel #wa_home_imgcontainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+section #wa_home_left_panel #wa_home_canvas {
+  max-width: 100%;
+  max-height: 100%;
+  min-height: 50%;
+}
+section #wa_home_right_panel {
+  width: 30%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #aaa;
+  overflow: auto;
+}
+section #wa_home_right_panel h2,
+section #wa_home_right_panel h3 {
+  text-align: center;
+}
+section #wa_home_right_panel h3 {
+  margin: 2rem 0 1rem 0;
+}
+section #wa_home_right_panel #wa_home_resultshow {
+  font-size: 1rem;
+  width: 100%;
+}
+section #wa_home_right_panel #wa_home_resultshow table {
+  margin: 0 auto;
+}
+section #wa_home_right_panel #wa_home_resultshow table td {
+  padding: .5rem;
+}
+footer {
+  height: 7vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+footer p {
+  text-align: center;
+  font-size: .7rem;
+}
+.wa-facecount-left-img-card {
+  width: 250px;
+  padding: 1rem;
+}
+.wa-facecount-left-img-card:hover {
+  cursor: pointer;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+.wa-facecount-left-img-card img {
+  width: 100%;
+}
+.wa-facecount-left-img-card p {
+  text-align: center;
+}

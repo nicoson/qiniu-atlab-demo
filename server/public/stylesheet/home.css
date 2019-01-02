@@ -1,0 +1,130 @@
+header {
+  height: 15vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+header div {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+header div:first-child {
+  height: 60%;
+}
+header div:first-child img {
+  height: 80%;
+  margin-left: 5vw;
+}
+header div:first-child p {
+  margin-left: 5vw;
+  font-size: 1.5rem;
+}
+header div#wa_home_navbar {
+  justify-content: space-around;
+  padding: .3rem;
+  background: url('/imgs/navbg.jpg');
+}
+header div#wa_home_navbar a {
+  color: #777;
+  text-decoration: none;
+}
+header div#wa_home_navbar a.wa-home-nav-selected {
+  color: #DAA520;
+}
+section {
+  height: 78vh;
+  padding: 20px;
+  overflow: auto;
+  display: flex;
+  border: 1px solid #aaa;
+}
+section #wa_home_left_panel {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  overflow: auto;
+  border: 1px solid #aaa;
+}
+section #wa_home_left_panel #wa_home_imgcontainer {
+  max-height: 70vh;
+  max-width: 65vw;
+  min-height: 20vh;
+}
+section #wa_home_left_panel #wa_home_canvas {
+  max-height: 70vh;
+  max-width: 65vw;
+  min-height: 20vh;
+}
+section #wa_home_right_panel {
+  width: 30%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #aaa;
+  overflow: auto;
+}
+section #wa_home_right_panel h2,
+section #wa_home_right_panel h3 {
+  text-align: center;
+}
+section #wa_home_right_panel h3 {
+  margin: 2rem 0 1rem 0;
+}
+section #wa_home_right_panel #wa_home_resultshow {
+  font-size: 1rem;
+  width: 100%;
+}
+section #wa_home_right_panel #wa_home_resultshow fieldset {
+  margin: 2rem 0;
+}
+section #wa_home_right_panel #wa_home_resultshow fieldset legend {
+  font-weight: 900;
+}
+section #wa_home_right_panel #wa_home_resultshow fieldset table {
+  width: 100%;
+}
+section #wa_home_right_panel #wa_home_resultshow fieldset table th,
+section #wa_home_right_panel #wa_home_resultshow fieldset table td {
+  padding: .7rem;
+  text-align: center;
+}
+section #wa_home_right_panel #wa_home_resultshow fieldset table th {
+  width: 40%;
+}
+section #wa_home_right_panel #wa_home_resultshow fieldset table p {
+  padding: .3rem;
+}
+section #wa_home_right_panel #wa_home_resultshow table {
+  width: 100%;
+}
+section #wa_home_right_panel #wa_home_resultshow table th,
+section #wa_home_right_panel #wa_home_resultshow table td {
+  padding: .7rem;
+  text-align: left;
+  word-wrap: break-word;
+}
+section #wa_home_right_panel #wa_home_resultshow table th {
+  width: 40%;
+}
+section #wa_home_right_panel #wa_home_resultshow table p {
+  padding: .3rem;
+  text-align: left;
+}
+section #wa_home_right_panel #wa_home_resultshow p {
+  padding: 2rem;
+  text-align: center;
+}
+footer {
+  height: 7vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+footer p {
+  text-align: center;
+  font-size: .7rem;
+}

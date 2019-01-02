@@ -1,0 +1,355 @@
+python3 ./model/export_logs.py --cate=pulp --start=2018-04-27T00:00:00 --end=2018-04-27T23:59:59
+python3 ./model/export_logs.py --cate=terror --start=2018-04-27T00:00:00 --end=2018-04-27T23:59:59
+python3 ./model/export_logs.py --cate=politician --start=2018-04-27T00:00:00 --end=2018-04-27T23:59:59
+python3 ./model/export_logs.py --cate=detection --start=2018-04-27T00:00:00 --end=2018-04-27T23:59:59
+python3 ./model/export_logs.py --cate=pulp --start=2018-04-28T00:00:00 --end=2018-04-28T23:59:59
+python3 ./model/export_logs.py --cate=terror --start=2018-04-28T00:00:00 --end=2018-04-28T23:59:59
+python3 ./model/export_logs.py --cate=politician --start=2018-04-28T00:00:00 --end=2018-04-28T23:59:59
+python3 ./model/export_logs.py --cate=detection --start=2018-04-28T00:00:00 --end=2018-04-28T23:59:59
+pulp  table created successfully !!!
+terror  table created successfully !!!
+politician  table created successfully !!!
+detection  table created successfully !!!
+======= id:  5ae7f67837ed160001a5fb9e
+======= id:  5ae7f67837ed160001a5fba0
+======= id:  5ae7f67837ed160001a5fb9f
+======= id:  5ae7f67837ed160001a5fba2
+======= id:  5ae7f67837ed160001a5fba1
+pending_start
+pending_start
+======= id:  5ae7f67937ed160001a5fba3
+pending_start
+======= id:  5ae7f67937ed160001a5fba4
+======= id:  5ae7f67937ed160001a5fba5
+pending_start
+pending_start
+pending_start
+pending_start
+pending_start
+scheduling
+scheduling
+running
+scheduling
+running
+scheduling
+scheduling
+running
+running
+running
+running
+scheduling
+scheduling
+scheduling
+scheduling
+running
+running
+running
+running
+scheduling
+scheduling
+scheduling
+scheduling
+running
+running
+running
+scheduling
+scheduling
+running
+scheduling
+running
+scheduling
+running
+running
+scheduling
+scheduling
+running
+scheduling
+running
+scheduling
+running
+running
+scheduling
+scheduling
+scheduling
+running
+running
+scheduling
+running
+======= key:  politician_20180501130806_a23b29e2-4cfd-11e8-8668-8c8590436ea4.json
+start loading data ...
+politician_20180501130806_a23b29e2-4cfd-11e8-8668-8c8590436ea4.json
+scheduling
+665
+665 ' valid data remained'
+Results:  ,Records: 665  Duplicates: 665  Warnings: 665
+665 data inserted into politician table!!!
+scheduling
+scheduling
+======= key:  terror-detect_20180501130806_a235135e-4cfd-11e8-af7d-8c8590436ea4.json
+start loading data ...
+terror-detect_20180501130806_a235135e-4cfd-11e8-af7d-8c8590436ea4.json
+scheduling
+running
+running
+scheduling
+scheduling
+scheduling
+scheduling
+scheduling
+running
+======= key:  terror-classify_20180501130806_a22ad236-4cfd-11e8-ae42-8c8590436ea4.json
+start loading data ...
+terror-classify_20180501130806_a22ad236-4cfd-11e8-ae42-8c8590436ea4.json
+scheduling
+scheduling
+scheduling
+running
+scheduling
+scheduling
+scheduling
+scheduling
+25374
+809 ' valid data remained'
+Results:  *Records: 809  Duplicates: 33  Warnings: 33
+25374 data inserted into terror table!!!
+running
+scheduling
+scheduling
+scheduling
+scheduling
+scheduling
+running
+running
+running
+running
+running
+scheduling
+running
+running
+running
+running
+scheduling
+running
+running
+running
+running
+scheduling
+running
+running
+scheduling
+running
+running
+running
+running
+running
+======= key:  politician_20180501130806_a23907f4-4cfd-11e8-ae62-8c8590436ea4.json
+start loading data ...
+politician_20180501130806_a23907f4-4cfd-11e8-ae62-8c8590436ea4.json
+609
+609 ' valid data remained'
+Results:  ,Records: 609  Duplicates: 609  Warnings: 609
+609 data inserted into politician table!!!
+running
+scheduling
+113498
+1269 ' valid data remained'
+113498
+1269 ' valid data remained'
+Results:  )Records: 1269  Duplicates: 1  Warnings: 1
+OkPacket {
+  fieldCount: 0,
+  affectedRows: 1268,
+  insertId: 3048,
+  serverStatus: 2,
+  warningCount: 1,
+  message: ')Records: 1269  Duplicates: 1  Warnings: 1',
+  protocol41: true,
+  changedRows: 1 }
+Results:  )Records: 1269  Duplicates: 1  Warnings: 1
+OkPacket {
+  fieldCount: 0,
+  affectedRows: 1268,
+  insertId: 1116,
+  serverStatus: 2,
+  warningCount: 1,
+  message: ')Records: 1269  Duplicates: 1  Warnings: 1',
+  protocol41: true,
+  changedRows: 1 }
+running
+running
+running
+scheduling
+running
+======= key:  terror-classify_20180501130806_a22f3b64-4cfd-11e8-8155-8c8590436ea4.json
+start loading data ...
+terror-classify_20180501130806_a22f3b64-4cfd-11e8-8155-8c8590436ea4.json
+running
+scheduling
+running
+scheduling
+======= key:  terror-detect_20180501130806_a21f271a-4cfd-11e8-a01e-8c8590436ea4.json
+start loading data ...
+terror-detect_20180501130806_a21f271a-4cfd-11e8-a01e-8c8590436ea4.json
+25514
+817 ' valid data remained'
+Results:  *Records: 817  Duplicates: 30  Warnings: 30
+25514 data inserted into terror table!!!
+running
+scheduling
+running
+scheduling
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+114717
+1375 ' valid data remained'
+114717
+1375 ' valid data remained'
+Results:  )Records: 1375  Duplicates: 4  Warnings: 4
+OkPacket {
+  fieldCount: 0,
+  affectedRows: 1371,
+  insertId: 5134,
+  serverStatus: 2,
+  warningCount: 4,
+  message: ')Records: 1375  Duplicates: 4  Warnings: 4',
+  protocol41: true,
+  changedRows: 4 }
+Results:  )Records: 1375  Duplicates: 1  Warnings: 1
+OkPacket {
+  fieldCount: 0,
+  affectedRows: 1374,
+  insertId: 2385,
+  serverStatus: 2,
+  warningCount: 1,
+  message: ')Records: 1375  Duplicates: 1  Warnings: 1',
+  protocol41: true,
+  changedRows: 1 }
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
+running
