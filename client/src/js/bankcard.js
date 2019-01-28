@@ -145,7 +145,7 @@ function drawCanvas(res) {
         ctx.strokeStyle = "Lime";
         let tmp = '';
         for(let key in res) {
-            drawbox(ctx, [[res[key][0],res[key][1]], [res[key][2],res[key][3]], [res[key][4],res[key][5]], [res[key][6],res[key][7]]]);
+            drawbox(ctx, res[key]);
         }
     }
 }

@@ -47,66 +47,92 @@ document.querySelector('#wa_home_imgselector').addEventListener('change', functi
     let imgURL = window.URL.createObjectURL(e.target.files[0]);
     document.querySelector('#wa_home_imgcontainer').src = imgURL;
     
-    e.target.setAttribute('class', 'wa-component-hidden');
+    document.querySelector('#wa_home_image_input_panel').classList.toggle('wa-component-hidden');
     document.querySelector('#wa_home_imgcontainer').removeAttribute('class');
     getExif(e.target.files[0]);
 });
 
-document.querySelector("#wa_home_btn_submit").addEventListener('click', function(e) {
-    let file = document.querySelector('#wa_home_imgselector').files[0];
-    key = (new Date()).getTime() + '/' + file.name;
-    // 添加上传dom面板
-    let next = (response) =>{
-        let total = response.total;
-        console.log("进度：" + total.percent + "% ");
-        if(total.percent == 100) {
-            thereSword();
-        }
-    }
-    
-    let subscription;
-    // 调用sdk上传接口获得相应的observable，控制上传和暂停
-    let observable = qiniu.upload(file, key, CONFIG.token, CONFIG.putExtra, CONFIG.config);
-    observable.subscribe(next);
-});
-
-document.querySelector("#wa_home_btn_back").addEventListener('click', function(e) {
-    document.querySelector('#wa_home_imgcontainer').setAttribute('class', 'wa-component-hidden');
-    document.querySelector('#wa_home_canvas').setAttribute('class', 'wa-component-hidden');
-    document.querySelector('#wa_home_imgselector').removeAttribute('class');
+document.querySelector('#wa_home_imgurlinput').addEventListener('blur', function(e) {
+    let imgURL = e.target.value.trim();
     document.querySelector('#wa_home_imgselector').value = '';
-    document.querySelector("#wa_home_resultshow").innerHTML = '';
+    if(imgURL.length == 0) return;
+    document.querySelector('#wa_home_imgcontainer').src = imgURL;
+    
+    document.querySelector('#wa_home_image_input_panel').classList.toggle('wa-component-hidden');
+    document.querySelector('#wa_home_imgcontainer').removeAttribute('class');
+    // getExif(e.target.files[0]);
 });
 
-function thereSword() {
-    let pulp = fetch(CONFIG.app.domain + '/' + key + '?qpulp').then(e => e.json());
-    let terror = fetch(CONFIG.app.domain + '/' + key + '?qterror').then(e => e.json());
-    let politician = fetch(CONFIG.app.domain + '/' + key + '?qpolitician').then(e => e.json());
+document.querySelector("#wa_home_btn_submit").addEventListener('click', function(e) {
     showModal();
-    Promise.all([pulp, terror, politician]).then(res => {
-        let tmp = '';
-        //  pulp
-        tmp += showSummary(res);
-        tmp += showresult(res[0], 'pulp');
-        tmp += showresult(res[1], 'terror');
-        tmp += faceResult(res[2]);
+    if(document.querySelector('#wa_home_imgselector').files.length == 0) {
+        let uri = document.querySelector('#wa_home_imgurlinput').value.trim();
+        if(uri.length > 0) {
+            aicore(uri);
+        }
+    } else {
+        let file = document.querySelector('#wa_home_imgselector').files[0];
+        let reader = new FileReader();
+        reader.onload = function() {
+            let uri = 'data:application/octet-stream' + this.result.slice(this.result.indexOf(';base64'));
+            aicore(uri);
+        }
+        reader.readAsDataURL(file);
+    }
+});
 
-        if(typeof(res[2].result.detections) != 'undefined' && res[2].result.detections.length > 0) {
-            drawCanvas(res[2].result.detections);
-            document.querySelector('#wa_home_imgcontainer').setAttribute('class', 'wa-component-hidden');
-            document.querySelector('#wa_home_canvas').removeAttribute('class');
+
+function aicore(uri) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let postBody = {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(
+            {
+                url: uri
+            }
+        )
+    }
+    fetch(APIHOST+'/censor', postBody).then(e => e.json()).then(res => {
+        if(res.code == 1) {
+            
+        } else if(res.code == 200) {
+            let tmp = '';
+            tmp += showSummary(res.result);
+            tmp += showresult(res.result.scenes.pulp, 'pulp');
+            tmp += showresult(res.result.scenes.terror, 'terror');
+            tmp += showresult(res.result.scenes.ads, 'ads');
+            tmp += faceResult(res.result.scenes.politician);
+
+            if(res.result.scenes.politician.suggestion != 'pass') {
+                drawCanvas(res.result.scenes.politician.details);
+                document.querySelector('#wa_home_imgcontainer').setAttribute('class', 'wa-component-hidden');
+                document.querySelector('#wa_home_canvas').removeAttribute('class');
+            }
+
+            document.querySelector("#wa_home_resultshow").innerHTML = tmp;
         }
 
-        document.querySelector("#wa_home_resultshow").innerHTML = tmp;
         hideModal();
     });
 }
 
-function showSummary(res) {
+document.querySelector("#wa_home_btn_back").addEventListener('click', function(e) {
+    document.querySelector('#wa_home_imgcontainer').setAttribute('class', 'wa-component-hidden');
+    document.querySelector('#wa_home_canvas').setAttribute('class', 'wa-component-hidden');
+    document.querySelector('#wa_home_image_input_panel').classList.toggle('wa-component-hidden');
+    document.querySelector('#wa_home_imgselector').value = '';
+    document.querySelector('#wa_home_imgurlinput').value = '';
+    document.querySelector("#wa_home_resultshow").innerHTML = '';
+});
+
+function showSummary(result) {
     let tmp = [];
-    if(res[0].result.label == 0) tmp.push('涉黄');
-    if(res[1].result.label == 1) tmp.push('涉暴');
-    if(typeof(res[2].result.detections) != 'undefined' && res[2].result.detections.filter(e => e.sample != undefined).length > 0) tmp.push('涉政');
+    if(result.scenes.pulp.suggestion == 'block') tmp.push('涉黄');
+    if(result.scenes.terror.suggestion == 'block') tmp.push('涉暴');
+    if(result.scenes.ads.suggestion == 'block') tmp.push('小广告');
+    if(result.scenes.politician.suggestion != 'pass') tmp.push('涉政');
 
     return `<h3>鉴定结果</h3>
     <h2>该图片${(tmp.length == 0) ? "无特殊内容！" : tmp.join('、')}</h2>
@@ -116,15 +142,15 @@ function showSummary(res) {
 function showresult(res, cls) {
     let tmp = `
     <fieldset disabled="disabled">
-        <legend>“${(cls=='pulp')?'涉黄':((cls=='terror')?'暴恐':'政治')}”信息鉴定结果：</legend>
+        <legend>“${(cls=='pulp')?'涉黄':((cls=='terror')?'暴恐':((cls=='ads')?'小广告':'政治'))}”信息鉴定结果：</legend>
         <table>
             <tr>
                 <td>鉴别结果：</td>
-                <td>${resultMap(cls, res.result.label)}</td>
+                <td>${resultMap(cls, res)}</td>
             </tr>
             <tr>
                 <td>置信度：</td>
-                <td>${Math.round(res.result.score*10000)/100}%</td>
+                <td>${cls=='ads'?'-':(Math.round(res.details[0].score*10000)/100+'%')}</td>
             </tr>
         </table>
     </fieldset>
@@ -136,15 +162,15 @@ function showresult(res, cls) {
 function faceResult(response) {
     let tmp = '';
     let res = [];
-    if(typeof(response.result.detections) != 'undefined') {
-        res = response.result.detections.filter(e => e.sample != undefined);
+    if(response.suggestion != 'pass') {
+        res = response.details.filter(e => e.sample != undefined);
     }
 
     if(res.length > 0) {
         res.forEach(ele => {
             tmp += `<tr>
-                        <td>${ele.value.name}</td>
-                        <td>${Math.round(ele.value.score*10000)/100}%</td>
+                        <td>${ele.label}</td>
+                        <td>${Math.round(ele.score*10000)/100}%</td>
                     </tr>`;
         });
 
@@ -168,14 +194,16 @@ function faceResult(response) {
     }
 }
 
-function resultMap(cls, label) {
+function resultMap(cls, res) {
     switch(cls) {
         case 'pulp':
-            return (label == 0) ? '黄色淫秽' : ((label == 1) ? '极度性感' : '无淫秽内容');
+            return (res.details[0].label == 'pulp') ? '黄色淫秽' : ((res.details[0].label == 'sexy') ? '极度性感' : '无淫秽内容');
         case 'terror':
-            return (label == 0) ? '无暴恐内容' : '暴恐图片';
+            return (res.details[0].label == 'normal') ? '无暴恐内容' : '暴恐图片';
         case 'politician':
             return;
+        case 'ads':
+            return (res.suggestion == 'pass') ? '无广告内容' : '小广告';
         default:
             return '很隐晦，你行你上啊~';
     }
@@ -184,7 +212,12 @@ function resultMap(cls, label) {
 
 
 function drawCanvas(res) {
-    let imgURL = window.URL.createObjectURL(document.querySelector('#wa_home_imgselector').files[0]);
+    let imgURL = '';
+    if(document.querySelector('#wa_home_imgselector').files.length == 0) {
+        imgURL = document.querySelector('#wa_home_imgurlinput').value.trim();
+    } else {
+        imgURL = window.URL.createObjectURL(document.querySelector('#wa_home_imgselector').files[0]);
+    }
     let img = new Image();
     img.src = imgURL;
     img.onload = function() {
@@ -200,7 +233,7 @@ function drawCanvas(res) {
         ctx.strokeStyle = "Lime";
         let tmp = '';
         for(let key in res) {
-            drawbox(ctx, res[key].boundingBox.pts);
+            drawbox(ctx, res[key].detections[0].pts);
         }
     }
 }

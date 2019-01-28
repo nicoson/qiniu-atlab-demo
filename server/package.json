@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "export PORT=3000; node ./bin/www",
+    "dev": "export PORT=3000; node ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.18.2",

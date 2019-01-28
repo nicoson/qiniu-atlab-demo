@@ -1,5 +1,5 @@
-let APIHOST = 'http://0.0.0.0:3000';
-// let APIHOST = '';
+// let APIHOST = 'http://0.0.0.0:3000';
+let APIHOST = '';
 
 // let isEditor = sessionStorage.isEditor == undefined ? false : (sessionStorage.isEditor == 'true' ? true : false);
 
@@ -11,7 +11,7 @@ let APIHOST = 'http://0.0.0.0:3000';
 
 // initiate navbar
 let page = {
-    home:           '三剑合一',
+    home:           '万剑归宗',
     weixinweibo:    '微信微博',
     // 'ocr-ctpn':     '长文本',
     ocr:            '通用OCR',

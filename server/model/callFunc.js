@@ -8,6 +8,7 @@ class callFunc {
         this.isMock = isMock;
 
         if(!this.isMock) {
+            this.api_censor = 'http://ai.qiniuapi.com/v3/image/censor';
             this.api_ocr = "http://argus.atlab.ai/v1/ocr/text";
             this.api_scene = "http://argus.atlab.ai/v1/ocr/scene";
             this.api_ctpn_detect = "http://serve.atlab.ai/v1/eval/ocr-detect";
@@ -16,6 +17,7 @@ class callFunc {
             this.api_idcard = "http://serve.atlab.ai/v1/eval/ocr-idcard";
             this.api_idcard_sari = "http://argus.atlab.ai/v1/ocr/idcard";
             this.api_vat = "http://argus.atlab.ai/v1/ocr/vat";
+            this.api_bankcard = "http://argus.atlab.ai/v1/ocr/bankcard";
         } else {
             // cs api
             this.api_ocr = "http://ava-argus-gate.cs.cg.dora-internal.qiniu.io:5001/v1/ocr/text";
@@ -34,6 +36,29 @@ class callFunc {
                 'Authorization': 'QiniuStub uid=1&ut=2'
             }
         };
+    }
+
+    callCensor(imgurl) {
+        let postBody = JSON.stringify({
+            data: {"uri": imgurl},
+            params: {
+                scenes: ['pulp', 'terror', 'politician', 'ads']
+            }
+        });
+        let token = gt.genToken(this.api_censor, postBody);
+        this.options.headers.Authorization = this.isMock ? 'QiniuStub uid=1&ut=2':token;
+        this.options.body = postBody;
+
+        return new Promise(function(resolve, reject) {
+            console.log(this.api_censor);
+            fetch(this.api_censor, this.options).then(e => e.json()).then(e => {
+                console.log(e);
+                resolve(e);
+            }).catch(e => {
+                console.log(e);
+                resolve(e);
+            });
+        }.bind(this));
     }
 
     callOCR(imgurl) {

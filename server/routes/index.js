@@ -52,6 +52,13 @@ router.get('/bankcard', function(req, res, next) {
 
 
 
+//  post censor
+router.post('/censor', function(req, res, next) {
+  cf.callCensor(req.body.url).then(data => {
+    res.send(data);
+  });
+});
+
 //  post ocr detect & recognize
 router.post('/ocr', function(req, res, next) {
   cf.callOCR_adv(req.body.url).then(data => {

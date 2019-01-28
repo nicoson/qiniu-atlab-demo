@@ -48,6 +48,16 @@ section #wa_home_left_panel {
   overflow: auto;
   border: 1px solid #aaa;
 }
+section #wa_home_left_panel #wa_home_image_input_panel input {
+  display: block;
+  width: 100%;
+  padding: .5rem;
+}
+section #wa_home_left_panel #wa_home_image_input_panel p {
+  padding: 1rem;
+  width: 100%;
+  text-align: center;
+}
 section #wa_home_left_panel #wa_home_imgcontainer {
   max-height: 70vh;
   max-width: 65vw;
