@@ -92,6 +92,9 @@ document.querySelector("#wa_home_left_menu_bar_submit").addEventListener('click'
     if(name.trim() == '') {
         alert('请输入先分组名称');
         return;
+    } else if(!/[^\u4e00-\u9fa5]/.test(name)) {
+        alert('请不要使用中文命名');
+        return;
     }
 
     showModal();

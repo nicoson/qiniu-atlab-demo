@@ -1,4 +1,5 @@
 FROM xiaohui/node
+MAINTAINER nixiaohui <nixiaohui@qiniu.com>
 
 RUN apt-get update && apt-get install -y vim wget
 RUN mkdir /workspace

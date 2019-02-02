@@ -146,8 +146,8 @@ class TOKEN {
         return base64;
     };
     
-    genToken(accessKey, secretKey) {
-        var putPolicy = this.genPolicy();//{"scope":"customer-demo-bjrun-nxwa","deadline":1524194204};//this.genPolicy();
+    genToken(accessKey, secretKey, bucket) {
+        var putPolicy = this.genPolicy(bucket);//{"scope":"customer-demo-bjrun-nxwa","deadline":1524194204};//this.genPolicy();
 
         //SETP 2
         var put_policy = JSON.stringify(putPolicy);
@@ -168,9 +168,9 @@ class TOKEN {
         return upload_token;
     };
 
-    genPolicy() {
+    genPolicy(bucket) {
         var policy = new Object();
-        policy.scope = "customer-demo-bjrun-nxwa";
+        policy.scope = bucket;
         // // var key = Ext.getCmp("txt_key").getValue();
         // // if (key) {
         // //     policy.scope += (":" + key);
