@@ -104,12 +104,16 @@ section {
         overflow-y: auto;
         flex-shrink: 0;
 
+        // #wa_home_imgcontainer {
+        //     // width: 80%;
+        // }
+
         >div {
-            margin: 1rem 0;
+            margin: .5rem 0;
             width: 100%;
             flex-shrink: 0;
             
-            &:nth-of-type(2) {
+            &:nth-of-type(1) {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -120,6 +124,10 @@ section {
     
                 input {
                     margin: 1rem 0;
+                }
+
+                label {
+                    font-size: 0.8rem;
                 }
             }
 
@@ -142,12 +150,19 @@ section {
 
                 a {
                     margin-bottom: 2rem;
+                    width: 80%;
+                    word-break: break-all;
                 }
 
                 img {
                     width: 70%;
                 }
             }
+        }
+
+        #wa_search_right_threshold {
+            width: 40%;
+            padding: .5rem;
         }
     }
 }
@@ -183,31 +198,12 @@ footer {
     p {
         text-align: center;
     }
-
-    .wa-search-delete {
-        background: rgba(0,0,0,.3);
-        color: white;
-        position: absolute;
-        top: .5rem;;
-        right: 1.5rem;;
-    
-        padding: 2px;
-        width: 1.6rem;
-        height: 1.6rem;
-        border-radius: 50%;
-
-        vertical-align: middle;
-        text-align: center;
-
-        &:hover {
-            background: rgba(0,0,0,.7);
-        }
-    }
 }
 
 .wa-search-left-img-card {
     width: 250px;
     padding: 1rem;
+    position: relative;
 
     &:hover {
         cursor: pointer;
@@ -233,6 +229,27 @@ footer {
     animation-name: hiderightpanel;
     animation-duration: .8s;
     animation-timing-function: ease-out;
+}
+
+.wa-search-delete {
+    background: rgba(0,0,0,.3);
+    color: white;
+    position: absolute;
+    top: .5rem;;
+    right: .5rem;;
+
+    padding: 2px;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+        background: rgba(0,0,0,.7);
+    }
 }
 
 @keyframes showrightpanel {

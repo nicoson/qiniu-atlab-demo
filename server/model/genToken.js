@@ -15,7 +15,6 @@ class genToken {
         if(isMock) return 'QiniuStub uid=1&ut=2';
 
         let mac = new qiniu.auth.digest.Mac(accessKey, secretKey);
-        // let reqURL = "http://10.34.43.45:16301/admin/domain/oquqvdmso.bkt.clouddn.com";
         let contentType = 'application/json';
         let token = qiniu.util.generateAccessTokenV2(mac, reqURL, 'POST', contentType, reqBody);
         // let token = qiniu.util.generateAccessToken(mac, reqURL, reqBody);

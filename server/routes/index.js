@@ -1,7 +1,9 @@
 const express   = require('express');
 const router    = express.Router();
 const callFunc  = require('../model/callFunc');
+const tusoHelper  = require('../model/tusoHelper');
 let cf = new callFunc(false);
+let tuso = new tusoHelper();
 
 
 /* GET login page. */
@@ -125,5 +127,58 @@ router.post('/bankcard', function(req, res, next) {
 });
 
 
+
+
+/* ======================== *\
+          tuso API
+\* ======================== */
+//  get tuso groups
+router.get('/tusogetgroup', function(req, res, next) {
+  tuso.getGroup().then(e => {
+    res.send(e);
+  });
+});
+
+//  create new tuso groups
+router.get('/tusonewgroup', function(req, res, next) {
+  tuso.newGroup(req.query.name).then(e => {
+    res.send(e);
+  });
+});
+
+//  get tuso group's images
+router.get('/tusogetgroupimgs', function(req, res, next) {
+  tuso.getGroupImgs(req.query.name).then(e => {
+    res.send(e);
+  });
+});
+
+//  add image into group
+router.post('/tusoaddimgs', function(req, res, next) {
+  tuso.addImages(req.body.id, req.body.data).then(e => {
+    res.send(e);
+  });
+});
+
+//  search image from tuso group
+router.post('/tusosearchimgs', function(req, res, next) {
+  tuso.searchImages(req.body.data).then(e => {
+    res.send(e);
+  });
+});
+
+//  remove tuso group
+router.get('/tusoremovegroup', function(req, res, next) {
+  tuso.removeGroup(req.query.id).then(e => {
+    res.send(e);
+  });
+});
+
+//  remove tuso image
+router.get('/tusoremoveimage', function(req, res, next) {
+  tuso.removeImages(req.query.id, req.query.img).then(e => {
+    res.send(e);
+  });
+});
 
 module.exports = router;

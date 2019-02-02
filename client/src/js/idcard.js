@@ -13,6 +13,7 @@ if(sessionStorage.islogin == undefined || sessionStorage.islogin != 'true') {
 }
 
 window.onload = function(){
+    APIHOST = (typeof(APIHOST) == 'undefined') ? '' : APIHOST;
     let App = {
         Bucket: "customer-demo-bjrun-nxwa",
         SignUrl: "token.php",

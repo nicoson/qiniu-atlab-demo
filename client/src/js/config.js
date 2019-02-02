@@ -1,4 +1,4 @@
-let APIHOST = 'http://0.0.0.0:3000';
+// let APIHOST = 'http://0.0.0.0:3000';
 // let APIHOST = '';
 
 // let isEditor = sessionStorage.isEditor == undefined ? false : (sessionStorage.isEditor == 'true' ? true : false);
@@ -19,6 +19,7 @@ let page = {
     idcardsari:     '身份证',
     bankcard:       '银行卡',
     vat:            '增值税发票',
+    tuso:           '以图搜图',
     // search:         '涉暴信息(检测)',
     // facecount:      '涉政信息'
 };

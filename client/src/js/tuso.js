@@ -1,9 +1,7 @@
+APIHOST = (typeof(APIHOST) == 'undefined') ? '' : APIHOST;
 let FILENAME = null;
 let CONFIG = {};
 let SCALE = 1;
-let APIHOST = '';
-// let APIHOST = 'http://iias.qnservice.com';
-// let APIHOST = 'http://100.100.56.158:55555';
 
 if(sessionStorage.islogin == undefined || sessionStorage.islogin != 'true') {
     location.href = '/index.html';
@@ -15,10 +13,10 @@ window.onload = function(){
     let App = {
         Bucket: "customer-demo-bjrun-nxwa",
         SignUrl: "token.php",
-        //qiniu test account
+        //  account: aitest@qiniu.com
         AK: "M-G8vwdVdmKYKk50ZdCcIyizX1ItahHnJN-lWsSG",
         SK: "onBC_RiBMOa6cTvUDmpgpguDNZRz4Q_5oW5bkYlA",
-        domain: "http://p8jrba1ok.bkt.clouddn.com/"
+        domain: "http://p7fftezb2.bkt.clouddn.com/"
     }
 
     let tk = new TOKEN();
@@ -95,22 +93,10 @@ document.querySelector("#wa_home_left_menu_bar_submit").addEventListener('click'
         alert('请输入先分组名称');
         return;
     }
-    // alert(name);return;
-
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    let postBody = {
-        method: 'POST',
-        headers: headers,
-        body: JSON.stringify(
-            {
-                name: name
-            }
-        )
-    }
 
     showModal();
-    fetch(APIHOST + '/api/v1/image/group/new', postBody).then(e => {
+    let url = `${APIHOST}/tusonewgroup?name=${name}`;
+    fetch(url).then(e => {
         if(e.status == 200) {
             console.log('success');
         } else {
@@ -142,6 +128,7 @@ document.querySelector("#wa_home_btn_submit").addEventListener('click', function
 });
 
 function addtoGroup() {
+    let groupid = document.querySelector('#wa_home_left_details_bar').dataset.groupid;
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let postBody = {
@@ -149,6 +136,7 @@ function addtoGroup() {
         headers: headers,
         body: JSON.stringify(
             {
+                id: groupid,
                 data: [
                     {
                         "uri": CONFIG.app.domain + FILENAME,
@@ -162,15 +150,17 @@ function addtoGroup() {
         )
     }
 
-    let groupid = document.querySelector('#wa_home_left_details_bar').dataset.groupid;
-
-    fetch(APIHOST + '/api/v1/image/group/'+ groupid +'/add', postBody).then(e => {
+    
+    fetch(APIHOST + '/tusoaddimgs', postBody).then(e => {
         console.log(e.status);
         resetDetailPage(document.querySelector("#wa_home_left_details_bar").dataset.groupid);
     });
 }
 
 function searchcore() {
+    let groupid = document.querySelector('#wa_home_left_details_bar').dataset.groupid;
+    let threshold = parseFloat(document.querySelector('#wa_search_right_threshold').value.trim());
+    threshold = (threshold == '') ? 0.8 : threshold;
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let postBody = {
@@ -178,25 +168,32 @@ function searchcore() {
         headers: headers,
         body: JSON.stringify(
             {
-                "data": {
-                    "uri": 'http://p7fftezb2.bkt.clouddn.com/' + FILENAME
-                },
-                "params": {
-                    "limit": 5
+                data: {
+                    "data": {
+                        "uri": CONFIG.app.domain + FILENAME
+                    },
+                    "params": {
+                        "groups": [
+                            groupid
+                        ],
+                        "limit": 5,
+                        "threshold": threshold
+                    }
                 }
             }
         )
     }
-    let groupid = document.querySelector('#wa_home_left_details_bar').dataset.groupid;
-    let ocr = fetch(APIHOST + '/api/v1/image/group/' + groupid + '/search',postBody).then(e => e.json()).then(res => {
+    let url = APIHOST + '/tusosearchimgs';
+    fetch(url,postBody).then(e => e.json()).then(res => {
         let tmp = '<h3>检索结果</h3>';
-        if(res.result == null || res.result[0].score < 0.5) {
-            tmp += '<p>图库中不存在相似度在50%以上的图片</p>';
+        
+        if(res.result == null || res.result[0].score < threshold) {
+            tmp += `<p>图库中不存在相似度在${(threshold*100).toFixed(0)}%以上的图片</p>`;
         } else {
             res.result.forEach(res => {
-                tmp +=  `<img src="${res.uri}">
+                tmp +=  `<img src="${res.id}">
                     <p>置信度：${Math.floor(res.score*10000)/100}%</p>
-                    <a href="${res.uri}">${res.uri}</a>`;
+                    <a href="${res.id}">${res.id}</a>`;
             });
         }
         
@@ -210,63 +207,60 @@ function resetMenuPage() {
     //  TODO
     //  fetch
     showModal();
-    fetch(APIHOST + '/api/v1/image/group').then(e => e.json()).then(data => {
+    fetch(APIHOST + '/tusogetgroup').then(e => e.json()).then(data => {
         let tmp = '';
         data.result.forEach(element => {
-            tmp += `<div class="wa-search-left-doc-card" data-id="${element}">
-                        <div class="wa-search-delete" data-id="${element}">X</div>
+            tmp += `<div class="wa-search-left-doc-card" data-id="${element}" onclick="openFolder(event)">
+                        <div class="wa-search-delete" data-id="${element}" onclick="removeFolder(event)">X</div>
                         <img src="/imgs/doc.png" data-id="${element}" />
                         <p>${element}</p>
                     </div>`;
         });
         document.querySelector("#wa_home_left_menu_container").innerHTML = tmp;
-        addFolderEvent();
         hideModal();
     });
 }
 
-function addFolderEvent() {
-    document.querySelectorAll('.wa-search-left-doc-card').forEach(e => {
-        e.addEventListener('click', function(e) {
-            document.querySelector("#wa_home_left_menu").setAttribute('class', 'wa-component-hidden');
-            document.querySelector("#wa_home_left_details").removeAttribute('class');
-            document.querySelector("#wa_home_right_panel").setAttribute('class', 'wa-search-showringhtpanel');
-            document.querySelector("#wa_home_left_details_bar").setAttribute('data-groupid', e.target.dataset.id);
-
-            resetDetailPage(e.target.dataset.id);
-        });
-    });
-
-    document.querySelectorAll('.wa-search-delete').forEach(e => {
-        e.addEventListener('click', function(e) {
-            e.preventDefault()
-            e.stopPropagation();
-
-            let conf = confirm('您确定要删除这个图片分组码？');
-            if(conf) {
-                let headers = new Headers();
-                headers.append('Content-Type', 'application/json');
-                let postBody = {
-                    method: 'POST',
-                    headers: headers
-                }
-                fetch(APIHOST + '/api/v1/image/group/' + e.target.dataset.id + '/remove', postBody).then(e => {
-                    console.log(e.status);
-                    resetMenuPage();
-                });
-            }
-        })
-    })
+function openFolder(event) {
+    document.querySelector("#wa_home_left_menu").setAttribute('class', 'wa-component-hidden');
+    document.querySelector("#wa_home_left_details").removeAttribute('class');
+    document.querySelector("#wa_home_right_panel").setAttribute('class', 'wa-search-showringhtpanel');
+    document.querySelector("#wa_home_left_details_bar").setAttribute('data-groupid', event.target.dataset.id);
+    resetDetailPage(event.target.dataset.id);
 }
 
+function removeFolder(event) {
+    event.preventDefault()
+    event.stopPropagation();
+
+    let conf = confirm('您确定要删除这个图片分组码？');
+    if(conf) {
+        let url = `${APIHOST}/tusoremovegroup?id=${event.target.dataset.id}`
+        fetch(url).then(e => {
+            resetMenuPage();
+        });
+    }
+}
+
+function removeImage(event) {
+    event.preventDefault()
+    event.stopPropagation();
+    let groupid = document.querySelector('#wa_home_left_details_bar').dataset.groupid;
+    let url = `${APIHOST}/tusoremoveimage?img=${event.target.dataset.id}&id=${groupid}`;
+    fetch(url).then(e => {
+        resetDetailPage(groupid);
+    });
+}
 
 function resetDetailPage(id) {
     showModal()
-    fetch(APIHOST + '/api/v1/image/group/' + id).then(e => e.json()).then(data => {
+    let url = `${APIHOST}/tusogetgroupimgs?name=${id}`;
+    fetch(url).then(e => e.json()).then(data => {
         let tmp = '';
-        if(data.result.length > 0){
+        if(data.result != null){
             data.result.forEach(element => {
                 tmp += `<div class="wa-search-left-img-card">
+                            <div class="wa-search-delete" data-id="${element.id}" onclick="removeImage(event)">X</div>
                             <a href="${element.id}" target="_blank">
                                 <img src="${element.id}" data-id="${element.id}">
                                 <p>${element.id.split('/').slice(-1)[0]}</p>

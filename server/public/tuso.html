@@ -5,23 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <base target="_blank" />
-    <title>智能图像分析系统</title>
+    <title>七牛云-人工智能实验室</title>
     <link rel="stylesheet" href="./stylesheet/common.css">
-    <link rel="stylesheet" href="./stylesheet/search.css">
+    <link rel="stylesheet" href="./stylesheet/tuso.css">
     <!-- <link rel="stylesheet" href="./libs/css/bootstrap.min.css"> -->
 </head>
 <body>
     <header>
         <div>
-            <!-- <img src="/imgs/qiniulogo.png" alt=""> -->
-            <p>智能图像分析系统</p>
+            <img src="/imgs/qiniulogo.png" alt="">
+            <p>七牛云-人工智能实验室</p>
         </div>
-        <div id="wa_home_navbar">
-            <a href="/home.html" target="_self">图像智能分类</a>
-            <a href="/ocr.html" target="_self">OCR识别</a>
-            <a class="wa-home-nav-selected" href="/search.html" target="_self">搜图</a>
-            <a href="/facecount.html" target="_self">人物信息检测</a>
-        </div>
+        <div id="wa_home_navbar"></div>
     </header>
     <section class="wa-component-hidden">
         <div id="wa_home_left_panel">
@@ -51,11 +46,14 @@
         </div>
         <div id="wa_home_right_panel" class="wa-component-hidden">
             <div>
-                <button id="wa_home_btn_submit" class="wa-btn-success">检索</button>
-            </div>
-            <div>
                 <input type="file" id="wa_home_imgselector" />
                 <img id="wa_home_imgcontainer" src="" alt="">
+                <label for="wa_search_right_threshold">
+                    设定阈值：<input id="wa_search_right_threshold" type="number" min=0 max=1 step=0.05 value=0.8 />
+                </label>
+            </div>
+            <div>
+                <button id="wa_home_btn_submit" class="wa-btn-success">检索</button>
             </div>
             <div id="wa_home_resultshow"></div>
         </div>
@@ -69,6 +67,6 @@
     <script src="https://unpkg.com/qiniu-js@v2.2.2/dist/qiniu.min.js"></script>
     <script src="./javascript/token.js"></script>
     <script src="./javascript/config.js"></script>
-    <script src="./javascript/search.js"></script>
+    <script src="./javascript/tuso.js"></script>
 </body>
 </html>

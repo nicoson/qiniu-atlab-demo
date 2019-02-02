@@ -1,7 +1,7 @@
 let key = null;
 let CONFIG = {};
 let SCALE = 1;
-// let OCRAPI = 'http://localhost:3000/ocr';
+APIHOST = (typeof(APIHOST) == 'undefined') ? '' : APIHOST;
 let OCRAPI = APIHOST + '/bankcard';
 // let OCRAPI = 'http://iias.qnservice.com/api/v1/ocr';
 // let OCRAPI = '/api/v1/ocr';
