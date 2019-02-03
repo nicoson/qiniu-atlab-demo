@@ -3,6 +3,7 @@ const qiniu = require("qiniu");
 // const accessKey = "yvkBAhylLK6HTrhU644UcFiVeFhRMR4geKGB1Prt";
 // const secretKey = "1Kfm9tUJURJWxYFHWL1X-HuVVFMMEPwn2S4j5EoW";
 
+//  nixiaohui@qiniu.com
 const accessKey = "UQGWo-wxlNoVY6WSjHpnNCPEKGZ3F4iaiQgqONAQ";
 const secretKey = "VVgmkRHhuq57Kwwlk8cUKt7DyHcN3bDJQZLlTqHl";
 

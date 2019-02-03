@@ -1,5 +1,4 @@
 let key = null;
-let CONFIG = {};
 let SCALE = 1;
 // let OCRAPI = 'http://100.100.56.220:3000/weixinweibo';
 let OCRAPI = '/weixinweibo';
@@ -14,38 +13,6 @@ if(sessionStorage.islogin == undefined || sessionStorage.islogin != 'true') {
 
 window.onload = function(){
     APIHOST = (typeof(APIHOST) == 'undefined') ? '' : APIHOST;
-
-    let App = {
-        Bucket: "customer-demo-bjrun-nxwa",
-        SignUrl: "token.php",
-        //qiniu test account
-        AK: "M-G8vwdVdmKYKk50ZdCcIyizX1ItahHnJN-lWsSG",
-        SK: "onBC_RiBMOa6cTvUDmpgpguDNZRz4Q_5oW5bkYlA",
-        domain: "http://p7fftezb2.bkt.clouddn.com/"
-    }
-
-    let tk = new TOKEN();
-
-    let token = tk.genToken(App.AK, App.SK);
-    // console.log(token);
-        
-    let config = {
-        useCdnDomain: true,
-        region: qiniu.region.z0
-    };
-        
-    let putExtra = {
-        fname: "",
-        params: {},
-        mimeType: null
-    };
-
-    CONFIG = {
-        token: token,
-        putExtra: putExtra, 
-        config: config,
-        app: App
-    };
 };
 
 document.querySelector('#wa_home_imgselector').addEventListener('change', function(e) {
@@ -91,7 +58,7 @@ function aicore() {
         headers: headers,
         body: JSON.stringify(
             {
-                url: 'http://p7fftezb2.bkt.clouddn.com/' + key
+                url: CONFIG.app.domain + key
             }
         )
     }

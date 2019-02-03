@@ -146,6 +146,13 @@ router.get('/tusonewgroup', function(req, res, next) {
   });
 });
 
+//  remove tuso group
+router.get('/tusoremovegroup', function(req, res, next) {
+  tuso.removeGroup(req.query.id).then(e => {
+    res.send(e);
+  });
+});
+
 //  get tuso group's images
 router.get('/tusogetgroupimgs', function(req, res, next) {
   tuso.getGroupImgs(req.query.name).then(e => {
@@ -163,13 +170,6 @@ router.post('/tusoaddimgs', function(req, res, next) {
 //  search image from tuso group
 router.post('/tusosearchimgs', function(req, res, next) {
   tuso.searchImages(req.body.data).then(e => {
-    res.send(e);
-  });
-});
-
-//  remove tuso group
-router.get('/tusoremovegroup', function(req, res, next) {
-  tuso.removeGroup(req.query.id).then(e => {
     res.send(e);
   });
 });

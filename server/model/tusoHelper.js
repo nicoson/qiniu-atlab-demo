@@ -129,7 +129,7 @@ class tusoHelper {
     }
 
     async removeGroup(group_id) {
-        let url = `${config.APIHOST}/v1/image/group/${encodeURIComponent(group_id)}/remove`;
+        let url = `${config.APIHOST}/v1/image/group/${encodeURI(group_id)}/remove`;
         let token = this.genToken(url, '', 'POST', 'qiniu');
         let options = {
             method: "POST", 
@@ -141,6 +141,7 @@ class tusoHelper {
         console.log(url);
         console.log(JSON.stringify(options));
         let res = await fetch(url, options).then(e => e.json());
+        console.log(res);
         return res;
     }
 }

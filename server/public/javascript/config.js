@@ -8,6 +8,40 @@
 // } else {
 //     document.querySelector('section').removeAttribute('class');
 // }
+let CONFIG = {};
+{
+    let App = {
+        Bucket: "atlab-demo-tuso",
+        //  account: aitest@qiniu.com
+        AK: "M-G8vwdVdmKYKk50ZdCcIyizX1ItahHnJN-lWsSG",
+        SK: "onBC_RiBMOa6cTvUDmpgpguDNZRz4Q_5oW5bkYlA",
+        domain: "http://pma42jeo6.bkt.clouddn.com/"
+    }
+    
+    let tk = new TOKEN();
+    
+    let token = tk.genToken(App.AK, App.SK, App.Bucket);
+    // console.log(token);
+        
+    let config = {
+        useCdnDomain: true,
+        region: qiniu.region.z0
+    };
+        
+    let putExtra = {
+        fname: "",
+        params: {},
+        mimeType: null
+    };
+    
+    CONFIG = {
+        token: token,
+        putExtra: putExtra, 
+        config: config,
+        app: App
+    };
+}
+
 
 // initiate navbar
 let page = {

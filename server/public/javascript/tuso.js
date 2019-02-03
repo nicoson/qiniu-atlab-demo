@@ -1,6 +1,5 @@
 APIHOST = (typeof(APIHOST) == 'undefined') ? '' : APIHOST;
 let FILENAME = null;
-let CONFIG = {};
 let SCALE = 1;
 
 if(sessionStorage.islogin == undefined || sessionStorage.islogin != 'true') {
@@ -10,41 +9,6 @@ if(sessionStorage.islogin == undefined || sessionStorage.islogin != 'true') {
 }
 
 window.onload = function(){
-    let App = {
-        Bucket: "customer-demo-bjrun-nxwa",
-        SignUrl: "token.php",
-        //  account: aitest@qiniu.com
-        AK: "M-G8vwdVdmKYKk50ZdCcIyizX1ItahHnJN-lWsSG",
-        SK: "onBC_RiBMOa6cTvUDmpgpguDNZRz4Q_5oW5bkYlA",
-        domain: "http://p7fftezb2.bkt.clouddn.com/"
-    }
-
-    let tk = new TOKEN();
-
-    let token = tk.genToken(App.AK, App.SK);
-    // console.log(token);
-        
-    let config = {
-        useCdnDomain: true,
-        region: qiniu.region.z0
-    };
-        
-    let putExtra = {
-        fname: "",
-        params: {},
-        mimeType: null
-    };
-
-    CONFIG = {
-        token: token,
-        putExtra: putExtra, 
-        config: config,
-        app: App
-    };
-
-    // fetch group list info
-    // fetch('/')
-    
     resetMenuPage();
 };
 
@@ -92,7 +56,7 @@ document.querySelector("#wa_home_left_menu_bar_submit").addEventListener('click'
     if(name.trim() == '') {
         alert('请输入先分组名称');
         return;
-    } else if(!/[^\u4e00-\u9fa5]/.test(name)) {
+    } else if(/[\u4e00-\u9fa5]/.test(name)) {
         alert('请不要使用中文命名');
         return;
     }
@@ -213,6 +177,7 @@ function resetMenuPage() {
     fetch(APIHOST + '/tusogetgroup').then(e => e.json()).then(data => {
         let tmp = '';
         data.result.forEach(element => {
+            if(/[\u4e00-\u9fa5]/.test(element)) return; //  filter chinese characher as chinese issue
             tmp += `<div class="wa-search-left-doc-card" data-id="${element}" onclick="openFolder(event)">
                         <div class="wa-search-delete" data-id="${element}" onclick="removeFolder(event)">X</div>
                         <img src="/imgs/doc.png" data-id="${element}" />

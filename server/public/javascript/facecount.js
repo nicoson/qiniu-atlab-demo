@@ -1,10 +1,7 @@
 let key = null;
 let FILELIST = [];
-let CONFIG = {};
 let SCALE = 1;
 let APIHOST = '';
-// let APIHOST = 'http://iias.qnservice.com';
-// let APIHOST = 'http://100.100.56.158:55555';
 
 if(sessionStorage.islogin == undefined || sessionStorage.islogin != 'true') {
     location.href = '/index.html';
@@ -13,38 +10,6 @@ if(sessionStorage.islogin == undefined || sessionStorage.islogin != 'true') {
 }
 
 window.onload = function(){
-    let App = {
-        Bucket: "customer-demo-bjrun-nxwa",
-        SignUrl: "token.php",
-        //qiniu test account
-        AK: "M-G8vwdVdmKYKk50ZdCcIyizX1ItahHnJN-lWsSG",
-        SK: "onBC_RiBMOa6cTvUDmpgpguDNZRz4Q_5oW5bkYlA",
-        domain: "http://p7fftezb2.bkt.clouddn.com/"
-    }
-
-    let tk = new TOKEN();
-
-    // let token = 'M-G8vwdVdmKYKk50ZdCcIyizX1ItahHnJN-lWsSG:pP8sNG7YVjqDhXgWVHm2Y2lRVK8=:eyJzY29wZSI6ImN1c3RvbWVyLWRlbW8tYmpydW4tbnh3YSIsImRlYWRsaW5lIjoxNTI0MTk4NzYwfQ==';
-    let token = tk.genToken(App.AK, App.SK);
-    // console.log(token);
-        
-    let config = {
-        useCdnDomain: true,
-        region: qiniu.region.z0
-    };
-        
-    let putExtra = {
-        fname: "",
-        params: {},
-        mimeType: null
-    };
-
-    CONFIG = {
-        token: token,
-        putExtra: putExtra, 
-        config: config,
-        app: App
-    };
 };
 
 document.querySelector('#wa_home_imgselector').addEventListener('change', function(e) {
