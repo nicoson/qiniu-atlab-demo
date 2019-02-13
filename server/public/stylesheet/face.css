@@ -1,0 +1,17 @@
+section {
+  justify-content: center;
+}
+section #videocontainer {
+  position: relative;
+}
+section #videocontainer video {
+  max-height: 100%;
+  max-width: 100%;
+}
+section #videocontainer canvas {
+  position: absolute;
+  max-height: 100%;
+  max-width: 100%;
+  top: 0;
+  left: 0;
+}

@@ -43,7 +43,7 @@ if(argv.env == ENV_Production){
 var paths = {
 	less: 'src/less/*.less',
 	lessDest: destDir + '/stylesheet',
-	appjs: 'src/js/*.js',
+	appjs: 'src/js/**/*',
 	appjsDest: destDir + '/javascript',
 	venderJS: ['bower_components/jquery/dist/jquery.min.js',
 				'bower_components/bootstrap/dist/js/bootstrap.min.js'],
@@ -52,7 +52,7 @@ var paths = {
 	venderCSSDest: destDir + '/libs/css',
 	appviews: 'src/views/*.html',
 	appviewsDest: destDir,
-	appjson: 'src/json/*.json',
+	appjson: 'src/json/**/*',
 	appjsonDest: destDir + '/json',
 	appresource: 'src/resource/**/*',
 	appresourceDest: destDir + '/resource',

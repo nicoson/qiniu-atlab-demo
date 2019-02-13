@@ -7,12 +7,16 @@
 var app = require('../app');
 var debug = require('debug')('imagelabeltoolserver:server');
 var http = require('http');
+//添加
+var https = require('https');
+var fs = require('fs');
+
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '443' || '3000');
 app.set('port', port);
 
 /**
@@ -25,9 +29,27 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+var httpPort = normalizePort(process.env.PORT || '80');
+server.listen(httpPort);
 server.on('error', onError);
 server.on('listening', onListening);
+
+/**
+ * Create HTTPS server.
+ */
+// >openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 3650
+var options = {
+  key: fs.readFileSync(__dirname + '/key.pem'),
+  cert: fs.readFileSync(__dirname + '/cert.pem'),
+  passphrase: '123456'
+};
+var httpsServer = https.createServer(options,app);
+
+// 添加 监听
+var httpsPort = normalizePort('443');
+httpsServer.listen(httpsPort);
+httpsServer.on('error',onError);
+httpsServer.on('listening',onListening);
 
 /**
  * Normalize a port into a number, string, or false.

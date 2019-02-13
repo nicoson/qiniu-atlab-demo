@@ -13,7 +13,7 @@ section {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background: url("/imgs/bg.png");
+  background: url("/imgs/bg.gif");
   background-size: 100% 100%;
 }
 section > div:first-child p {

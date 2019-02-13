@@ -9,7 +9,7 @@
 //     document.querySelector('section').removeAttribute('class');
 // }
 let CONFIG = {};
-{
+if(typeof(TOKEN) != 'undefined') {
     let App = {
         Bucket: "atlab-demo-tuso",
         //  account: aitest@qiniu.com
@@ -54,6 +54,7 @@ let page = {
     bankcard:       '银行卡',
     vat:            '增值税发票',
     tuso:           '以图搜图',
+    face:           '人脸检测',
     // search:         '涉暴信息(检测)',
     // facecount:      '涉政信息'
 };
