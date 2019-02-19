@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./stylesheet/home.css">
     <link rel="stylesheet" href="./stylesheet/face.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/hls.js/latest/hls.min.js"></script>
     <script src="./javascript/face/face-api.js"></script>
     <script src="./javascript/face/drawing.js"></script>
 </head>
@@ -22,9 +23,42 @@
         <div id="wa_home_navbar"></div>
     </header>
     <section class="wa-component-hidden">
-        <div id="videocontainer">
-            <video onplay="onPlay(this)" id="inputVideo" autoplay muted></video>
-            <canvas id="overlay" />
+        <div id="wa_home_left_panel">
+            <!-- fps_meter -->
+            <div id="fps_meter" class="row side-by-side">
+                <table>
+                    <tr>
+                        <td>Time:</td>
+                        <td><input disabled value="-" id="time" type="text" class="bold"></td>
+                    </tr>
+                    <tr>
+                        <td>Estimated Fps:</td>
+                        <td><input disabled value="-" id="fps" type="text" class="bold"></td>
+                    </tr>
+                </table>
+            </div>
+            <!-- fps_meter -->
+
+            <div id="videocontainer">
+                <video onplay="onPlay(this)" id="inputVideo" autoplay muted controls></video>
+                <canvas id="overlay"></canvas>
+            </div>
+        </div>
+        <div id="wa_home_right_panel">
+            <div>
+                <p>摄像头人脸检测</p>
+                <button class="btn-primary" onclick="runCamera()">开启检测</button>
+            </div>
+            <div>
+                <p>视频文件人脸检测</p>
+                <input id="at_face_input_file" type="file" />
+                <button class="btn-primary" onclick="runVideo()">开启检测</button>
+            </div>
+            <div>
+                <p>HLS流人脸检测</p>
+                HLS: <input id="at_face_input_hls" type="text" value="http://cyberplayerplay.kaywang.cn/cyberplayer/demo201711-L1.m3u8" />
+                <button class="btn-primary" onclick="runHLS()">开启检测</button>
+            </div>
         </div>
     </section>
     <footer>

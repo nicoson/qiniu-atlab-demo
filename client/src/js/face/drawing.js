@@ -24,7 +24,7 @@ function drawLandmarks(dimensions, canvas, results, withBoxes = true) {
 
   const faceLandmarks = resizedResults.map(det => det.landmarks)
   const drawLandmarksOptions = {
-    lineWidth: 6,
+    lineWidth: 5,
     drawLines: false,
     color: 'lime'
   }
